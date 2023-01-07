@@ -9,16 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.4.6",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@ethersproject/bignumber": "^5.7.0",
     "@starknet-react/core": "^0.14.7",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
+    "big-number": "^2.0.0",
+    "bn.js": "^5.2.1",
+    "bn.js-typings": "^1.0.1",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
+    "framer-motion": "^6",
+    "get-starknet": "^2.0.0",
     "next": "13.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "starknet": "^4.9.0",
+    "starknet": "^4.18.0",
+    "types-bn": "^0.0.1",
     "typescript": "4.9.3"
   }
 }

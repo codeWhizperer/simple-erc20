@@ -1,41 +1,45 @@
-import {
-  useAccount,
-  useConnectors,
-  InjectedConnector,
-} from "@starknet-react/core";
+import { Button, Text } from "@chakra-ui/react";
+import { connect, ConnectOptions } from "get-starknet";
 import React, { useEffect, useState } from "react";
 import { shortenAddress } from "../../web3/helper";
+import { useTokenContract } from "../../web3/hooks/useGetContract";
 
 function Header() {
-  const { address } = useAccount();
-
-  const { connect } = useConnectors();
-
-  const [connected, setConnected] = useState(false);
-
-  
-  const status = {
-    isActive: connected,
-    account: address!,
+  const [address, setAddress] = useState<string>("");
+  const [connected, setConnected] = useState<boolean>();
+  console.log(connected)
+  const handleConnect = async () => {
+    const res = await connect();
+    if (!res?.isConnected) {
+      await res?.enable({ starknetVersion: "v4" });
+      setAddress(res?.selectedAddress || "");
+      setConnected(res?.isConnected);
+    } else {
+      await res?.enable({ starknetVersion: "v4" });
+      setAddress(res?.selectedAddress || "");
+      setConnected(res?.isConnected);
+    }
   };
-
-  // useEffect(() =>{
-
-  // },[address, connected])
-  const connectWallet = () => {
-    connect(new InjectedConnector({ options: { id: "argentX" } }));
-    setConnected(true);
-    localStorage.setItem("connectKey", JSON.stringify(status));
-  };
+  useEffect(() => {
+    handleConnect();
+  }, [address]);
 
   return (
     <div className="header">
-      <h1>StarknetCore</h1>
+      <Text fontSize={24} fontWeight={600}>
+        StarknetCore
+      </Text>
       {!connected ? (
-        <button onClick={connectWallet}>Connect with ArgentX</button>
+        <Button onClick={handleConnect}>Connect with ArgentX</Button>
       ) : (
-        <p>{shortenAddress(address!)}</p>
+        <Text fontSize={24} fontWeight={600}>
+          {shortenAddress(address!)}{" "}
+        </Text>
       )}
+
+      {/* <Text fontSize={24} fontWeight={600}>
+          {/* {shortenAddress(address!)} */}
+      {/* </Text> */}
     </div>
   );
 }
