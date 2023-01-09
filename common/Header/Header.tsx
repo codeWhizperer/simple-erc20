@@ -4,25 +4,13 @@ import React, { useEffect, useState } from "react";
 import { shortenAddress } from "../../web3/helper";
 import { useTokenContract } from "../../web3/hooks/useGetContract";
 
-function Header() {
-  const [address, setAddress] = useState<string>("");
-  const [connected, setConnected] = useState<boolean>();
-  console.log(connected)
-  const handleConnect = async () => {
-    const res = await connect();
-    if (!res?.isConnected) {
-      await res?.enable({ starknetVersion: "v4" });
-      setAddress(res?.selectedAddress || "");
-      setConnected(res?.isConnected);
-    } else {
-      await res?.enable({ starknetVersion: "v4" });
-      setAddress(res?.selectedAddress || "");
-      setConnected(res?.isConnected);
-    }
-  };
-  useEffect(() => {
-    handleConnect();
-  }, [address]);
+type IHeader = {
+  address:string,
+  connected:boolean,
+  handleConnect: () => void
+}
+
+function Header({address, connected, handleConnect}:IHeader) {
 
   return (
     <div className="header">
@@ -37,9 +25,6 @@ function Header() {
         </Text>
       )}
 
-      {/* <Text fontSize={24} fontWeight={600}>
-          {/* {shortenAddress(address!)} */}
-      {/* </Text> */}
     </div>
   );
 }
