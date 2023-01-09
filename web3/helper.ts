@@ -8,12 +8,12 @@ export const shortenAddress = (address:string) =>{
 
 
 export function feltToString(felt:any) {
-    const newStrB = Buffer.from(felt.toString(16), 'hex')
+    const newStrB = Buffer.from(felt?.toString(16), 'hex')
     return newStrB.toString()
 }
   
 export function stringToFelt(str:any) {
-    return "0x" + Buffer.from(str).toString('hex')
+    return "0x" + Buffer.from(str)?.toString('hex')
 }
 
 export const provider = new Provider({
@@ -21,3 +21,4 @@ export const provider = new Provider({
       network: "goerli-alpha",
     },
   });
+
