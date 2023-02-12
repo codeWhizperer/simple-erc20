@@ -1,30 +1,35 @@
 import { Button, Text } from "@chakra-ui/react";
-import { connect, ConnectOptions } from "get-starknet";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useAccount, useConnectors, useStarknet } from "@starknet-react/core";
 import { shortenAddress } from "../../web3/helper";
-import { useTokenContract } from "../../web3/hooks/useGetContract";
+function Header() {
+  const { account } = useAccount();
+  const { connect, connectors } = useConnectors();
 
-type IHeader = {
-  address:string,
-  connected:boolean,
-  handleConnect: () => void
-}
-
-function Header({address, connected, handleConnect}:IHeader) {
-
+  const connected = !!account;
+// eager connect
+  useEffect(() => {
+    if (!connectors.length) {
+      return;
+    }
+    connect(connectors[0]);
+  }, [connect, connectors]);
   return (
     <div className="header">
       <Text fontSize={24} fontWeight={600}>
-        StarknetCore
+        Starknet
       </Text>
-      {!connected ? (
-        <Button onClick={handleConnect}>Connect with ArgentX</Button>
-      ) : (
+      {connected ? (
         <Text fontSize={24} fontWeight={600}>
-          {shortenAddress(address!)}{" "}
+          {shortenAddress(account.address)}{" "}
         </Text>
+      ) : (
+        <>
+          {connectors.map((connector) => (
+            <Button onClick={() => connect(connector)}>Connect Wallet</Button>
+          ))}
+        </>
       )}
-
     </div>
   );
 }

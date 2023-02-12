@@ -1247,10 +1247,10 @@
     "@noble/hashes" "~1.1.1"
     "@scure/base" "~1.1.0"
 
-"@starknet-react/core@^0.14.7":
-  version "0.14.7"
-  resolved "https://registry.yarnpkg.com/@starknet-react/core/-/core-0.14.7.tgz#43bcc049f68027a933dcf057908e8ee96267418c"
-  integrity sha512-/b83mKInfRkk/LkKMBv5VslwtZupb3ZsJ1T3Ysg3PuOOLWuUOsecSv6yu8aE96bNpNbq+oMrapkeB/jMFW2Stg==
+"@starknet-react/core@^0.14.8":
+  version "0.14.8"
+  resolved "https://registry.yarnpkg.com/@starknet-react/core/-/core-0.14.8.tgz#3e063e3d3d2832d76de44eda85b2879e93d069e0"
+  integrity sha512-PouT9Njd2Um+rbuh3thg+YGalR30uen2D9cnJsayQ+UbPwXs0W2Y1n0Kp/pSxi0z+D7wGXO8Vu3pi7jU5ZLjVg==
   dependencies:
     "@tanstack/react-query" "^4.3.4"
     immutable "^4.0.0"
